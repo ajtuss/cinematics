@@ -39,3 +39,18 @@ dependencies {
 test {
 	useJUnitPlatform()
 }
+
+task resolveDependencies(group: "build setup", description: "Resolve and prefetch dependencies") {
+	doLast {
+		def resolve = {
+			ConfigurationContainer configurations ->
+				configurations
+						.findAll({ Configuration c -> c.isCanBeResolved() })
+						.each({ c -> c.resolve() })
+		}
+		project.rootProject.allprojects.each { subProject ->
+			resolve(subProject.buildscript.configurations)
+			resolve(subProject.configurations)
+		}
+	}
+}
