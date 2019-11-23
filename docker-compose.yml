@@ -1,0 +1,15 @@
+version: '3.7'
+
+services:
+
+  mongo:
+    image: mongo
+
+  cinematics:
+    image: cinematics
+    env_file:
+      - .env
+    ports:
+      - 8080:8080
+    depends_on:
+      - mongo
