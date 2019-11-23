@@ -40,9 +40,9 @@ public class AmazonClient {
   private void initializeAmazon() {
     AWSCredentials credentials = new BasicAWSCredentials(this.accessKey, this.secretKey);
     this.s3client = AmazonS3ClientBuilder.standard()
-        .withRegion(region)
-        .withCredentials(new AWSStaticCredentialsProvider(credentials))
-        .build();
+                                         .withRegion(region)
+                                         .withCredentials(new AWSStaticCredentialsProvider(credentials))
+                                         .build();
   }
 
   public Optional<Image> uploadFile(MultipartFile multipartFile) {

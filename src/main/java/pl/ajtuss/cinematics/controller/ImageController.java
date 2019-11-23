@@ -32,18 +32,15 @@ public class ImageController {
   @PostMapping("/{id}/image")
   public ResponseEntity<?> uploadFile(@PathVariable("id") String id,
       @RequestPart(value = "file") MultipartFile file) {
-
     Optional<Movie> movie = imageService.updateImage(id, file);
 
     return ResponseEntity.of(movie);
-
-
   }
 
   @DeleteMapping("/{id}/image")
   public void deleteFile(@PathVariable("id") String id) {
     Optional<Movie> movie = movieRepository.findById(id);
     movie.map(Movie::getImage)
-        .ifPresent(imageService::deleteImage);
+         .ifPresent(imageService::deleteImage);
   }
 }
