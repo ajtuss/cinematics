@@ -6,7 +6,8 @@ services:
     image: mongo
 
   cinematics:
-    image: cinematics
+    build: .
+    image: registry.gitlab.com/ajtuss/cinematics
     env_file:
       - .env
     ports:
