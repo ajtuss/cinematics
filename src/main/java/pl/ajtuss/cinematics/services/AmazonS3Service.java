@@ -18,7 +18,7 @@ import pl.ajtuss.cinematics.model.Image;
 
 @Slf4j
 @Service
-public class AmazonClient {
+public class AmazonS3Service {
 
   @Value("${amazonProperties.endpointUrl}")
   private String endpointUrl;
@@ -28,7 +28,7 @@ public class AmazonClient {
   private final AmazonS3 s3client;
 
   @Autowired
-  public AmazonClient(AmazonS3 s3client) {
+  public AmazonS3Service(AmazonS3 s3client) {
     this.s3client = s3client;
   }
 

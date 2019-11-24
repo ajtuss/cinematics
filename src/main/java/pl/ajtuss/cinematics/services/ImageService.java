@@ -13,13 +13,13 @@ public class ImageService {
 
   private final MovieRepository movieRepository;
 
-  private final AmazonClient amazonClient;
+  private final AmazonS3Service amazonS3Service;
 
   @Autowired
   public ImageService(MovieRepository movieRepository,
-      AmazonClient amazonClient) {
+      AmazonS3Service amazonS3Service) {
     this.movieRepository = movieRepository;
-    this.amazonClient = amazonClient;
+    this.amazonS3Service = amazonS3Service;
   }
 
   public Optional<Movie> updateImage(String id, MultipartFile multipartFile) {
@@ -34,11 +34,11 @@ public class ImageService {
   }
 
   public Optional<Image> uploadImage(MultipartFile multipartFile) {
-    return amazonClient.uploadFile(multipartFile);
+    return amazonS3Service.uploadFile(multipartFile);
   }
 
   public void deleteImage(Image image) {
-    amazonClient.deleteFileFromS3Bucket(image);
+    amazonS3Service.deleteFileFromS3Bucket(image);
   }
 
 

@@ -12,36 +12,38 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import pl.ajtuss.cinematics.model.Movie;
-import pl.ajtuss.cinematics.repository.MovieRepository;
+import pl.ajtuss.cinematics.services.MovieService;
 
 @RestController
 @RequestMapping("/api/movies")
 public class MovieController {
 
-  private final MovieRepository movieRepository;
+  private final MovieService movieService;
 
-
-  public MovieController(MovieRepository movieRepository) {
-    this.movieRepository = movieRepository;
+  public MovieController(MovieService movieService) {
+    this.movieService = movieService;
   }
 
   @GetMapping
-  public Page<Movie> getAll(Pageable pageable) {
-    return movieRepository.findAll(pageable);
+  public ResponseEntity<Page<Movie>> getAll(@RequestParam(value = "s", required = false) String filter, Pageable pageable) {
+    Page<Movie> all = movieService.findAll(filter, pageable);
+
+    return ResponseEntity.ok(all);
   }
 
   @GetMapping("/{id}")
   public ResponseEntity<Movie> getOne(@PathVariable String id) {
-    Optional<Movie> byId = movieRepository.findById(id);
+    Optional<Movie> byId = movieService.findById(id);
 
     return ResponseEntity.of(byId);
   }
 
   @PostMapping
   public ResponseEntity<Movie> save(@RequestBody Movie movie) {
-    Movie saved = movieRepository.save(movie);
+    Movie saved = movieService.save(movie);
 
     return ResponseEntity
         .created(URI.create("/api/movies/" + saved.getId()))
@@ -50,19 +52,14 @@ public class MovieController {
 
   @PutMapping("/{id}")
   public ResponseEntity<Movie> update(@PathVariable String id, @RequestBody Movie movie) {
-    Optional<Movie> byId = movieRepository.findById(id);
-    Optional<Movie> saved = byId.map(m -> {
-      m.setName(movie.getName());
-      m.setDescription(movie.getDescription());
-      return m;
-    }).map(movieRepository::save);
+    Optional<Movie> updated = movieService.update(id, movie);
 
-    return ResponseEntity.of(saved);
+    return ResponseEntity.of(updated);
   }
 
   @DeleteMapping("/{id}")
   public ResponseEntity<?> delete(@PathVariable String id) {
-    movieRepository.deleteById(id);
+    movieService.deleteById(id);
 
     return ResponseEntity.noContent().build();
   }
