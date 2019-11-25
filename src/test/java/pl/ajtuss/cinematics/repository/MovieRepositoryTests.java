@@ -1,4 +1,4 @@
-package pl.ajtuss.cinematics;
+package pl.ajtuss.cinematics.repository;
 
 import java.util.Optional;
 import org.assertj.core.api.Assertions;
@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import pl.ajtuss.cinematics.MongoInitialize;
 import pl.ajtuss.cinematics.model.Movie;
-import pl.ajtuss.cinematics.repository.MovieRepository;
 
 @DataMongoTest
 public class MovieRepositoryTests extends MongoInitialize {

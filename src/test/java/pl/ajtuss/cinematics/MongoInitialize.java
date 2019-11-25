@@ -13,15 +13,15 @@ import org.springframework.util.ResourceUtils;
 
 public abstract class MongoInitialize {
 
-  private static String MOVIE = "movie";
+  public static final String MOVIE = "movie";
 
   @Autowired
-  MongoTemplate mongoTemplate;
+  public MongoTemplate mongoTemplate;
 
   private static final JacksonJsonParser PARSER = new JacksonJsonParser();
 
   @BeforeEach
-  protected void initializeDb() throws IOException {
+  public void initializeDb() throws IOException {
     File file = ResourceUtils.getFile("classpath:movies.json");
     byte[] bytes = Files.readAllBytes(file.toPath());
     String json = new String(bytes);
@@ -30,7 +30,7 @@ public abstract class MongoInitialize {
   }
 
   @AfterEach
-  protected void cleanDb() {
+  public void cleanDb() {
     mongoTemplate.dropCollection(MOVIE);
   }
 
