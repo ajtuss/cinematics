@@ -34,7 +34,7 @@ dependencies {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
 	testImplementation 'de.flapdoodle.embed:de.flapdoodle.embed.mongo'
-}
+	compile group: 'com.adobe.testing', name: 's3mock-junit5', version: '2.1.16'}
 
 test {
 	useJUnitPlatform()
