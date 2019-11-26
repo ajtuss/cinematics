@@ -1,10 +1,10 @@
 # Cinematics
 
-Cinematics is a simple REST microservice to store information about movies and images to them. 
-It's built with Spring Boot, mongoDb. To store images this application using AWS S3 bucket.
-There is need to create bucket on AWS S3 to run this microservice.
+Cinematics is a simple REST microservice to store information about movies and images of ones. 
+It is build with Spring Boot and mongoDb. To store images the application uses AWS S3 bucket.
+It is necessary to create bucket on AWS S3 to run this microservice.
 
-It can be built into a single jar file using Gradle or using docker containers.
+It can be build into a single .jar file using Gradle or using docker containers.
 The docker-compose script run also frontend application from [here](https://github.com/ajtuss/cinematics-gui)
 and seed the db with initial data.
 
@@ -15,7 +15,7 @@ To clone this repository, execute the following in the command line:
 $ git clone https://github.com/ajtuss/cinematics
 ```
 
-To run this application copy the .env.template to .env and fill with your credentials to S3 bucket.
+To run the application copy the .env.template to .env and fill with your credentials to S3 bucket.
 ```bash
 $ cp .env.template .env
 ```
