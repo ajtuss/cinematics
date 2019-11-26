@@ -14,3 +14,15 @@ services:
       - 8080:8080
     depends_on:
       - mongo
+
+  cinematics-gui:
+    image: registry.gitlab.com/ajtuss/cinematics-gui
+    ports:
+      - 80:80
+    depends_on:
+      - cinematics
+
+  mongo-seed:
+    build: ./src/main/docker/mongo-seed
+    depends_on:
+      - mongo
