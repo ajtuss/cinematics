@@ -7,7 +7,7 @@ services:
 
   cinematics:
     build: .
-    image: registry.gitlab.com/ajtuss/cinematics
+    image: ajtuss/cinematics
     env_file:
       - .env
     ports:
@@ -16,7 +16,7 @@ services:
       - mongo
 
   cinematics-gui:
-    image: registry.gitlab.com/ajtuss/cinematics-gui
+    image: ajtuss/cinematics-gui
     ports:
       - 80:80
     depends_on:
