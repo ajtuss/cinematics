@@ -30,6 +30,7 @@ The .jar file will be in build/libs folder.
 ## Run with docker-compose
 Run application with docker-compose:
 ```bash
+$ docker-compose pull
 $ docker-compose up -d
 ```
 The docker-compose default download images from registry. To build them yourself execute:
